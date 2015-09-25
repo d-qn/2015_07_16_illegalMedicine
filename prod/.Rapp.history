@@ -1,61 +1,3 @@
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-library(scales)
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 1) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-str(country.df)
-library(swiMap)
-?getShpLayers
-require(rgdal)#
-require(rgeos)#
-require(ggplot2)
-path.ch <- getPathShp('CH')#
-ch <- readOGR(path.ch, layer = 'municipalities')#
-ch.df <- formatShp(ch)#
-# plot swiss commune map#
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes#
-# add the lake and country contours#
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, color = "black", size = 2) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-ch.communes + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-str(country.df)
-geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot() + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot(aes(lon, lat)) + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot(aes(x = long, y = lat, group = group)) +  geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-str(country.df)
-ggplot(data = country.df,aes(x = long, y = lat, group = group)) +  geom_polygon( fill = NA, color = "black", size = 2)
-ch.communes + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey") + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-str(ch.df)
-unique(ch.df$id)
-length(unique(ch.df$id))
-str(ch.df)
-length(unique(ch.df$GEMNAME))
-length(unique(ch.df$BFSNR))
-head(df.ch)
-head(ch.df)
-tail(ch.df)
-which(ch.df$GEMNAME == 'Aeugst am Albis')
-ch.df[which(ch.df$GEMNAME == 'Aeugst am Albis'),]
-ch.df[which(ch.df$GEMNAME == 'Knonau'),]
-length(unique(ch.df$BFSNR))
-length(unique(ch.df$GEMNAME))
-duplicated(ch.df$BFSNR)
-ch.df[!duplicated(ch.df$BFSNR),c('BFSNR', 'GEMNAME')]
-ch.df[!duplicated(ch.df$BFSNR),'BFSNR']
-order(ch.df[!duplicated(ch.df$BFSNR),'BFSNR'])
-ch.df[order(ch.df[!duplicated(ch.df$BFSNR),'BFSNR']), c('BFSNR', 'GEMNAME')]
-ch.df[sort(ch.df[!duplicated(ch.df$BFSNR),'BFSNR']), c('BFSNR', 'GEMNAME')]
-order(ch.df[!duplicated(ch.df$BFSNR),'BFSNR'])
-ch.df[!duplicated(ch.df$BFSNR),c('BFSNR', 'GEMNAME')]
-bfsnName <- ch.df[!duplicated(ch.df$BFSNR),c('BFSNR', 'GEMNAME')]
-bfsnName
-?order
-order(bfsnName[,1])
-bfsnName[order(bfsnName[,1]),]
 bfsnName <- ch.df[!duplicated(ch.df$BFSNR),c('BFSNR', 'GEMNAME')]
 bfsnName <- ch.df[!duplicated(ch.df$BFSNR),c('BFSNR', 'GEMNAME')]#
 str(bfsnName[order(bfsnName[,1]),])
@@ -499,6 +441,82 @@ ls()
 dd
 library(dplyr)
 50000*(11875 /7364148 )
+library(streamgraph)#
+library(dplyr)#
+library(babynames)#
+library(DT)#
+#
+ggplot2::movies %>%#
+  select(year, Action, Animation, Comedy, Drama, Documentary, Romance, Short) %>%#
+  tidyr::gather(genre, value, -year) %>%#
+  group_by(year, genre) %>%#
+  tally(wt=value) -> dat#
+#
+streamgraph(dat, "genre", "n", "year", interactive=TRUE) %>%#
+  sg_axis_x(20, "year", "%Y") %>%#
+  sg_fill_brewer("PuOr")
+install.packages("networkD3")
+library("networkD3")
+?sankeyNetwork
+?sankeyNetworkOutput
+devtools::install_github("timelyportfolio/parsetR")
+library(parsetR)#
+parset(Titanic)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.5, width = "80%", height = 400)
+? parset
+UCBAdmissions
+str(UCBAdmissions)
+head(UCBAdmissions)
+str(UCBAdmissions)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.5, width = "100%", height = 400)
+?parset
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0, width = "100%", height = 400)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.9, width = "100%", height = 400)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.4, width = "100%", height = 400)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.3, width = "100%", height = 400)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.7, width = "100%", height = 400)
+library(parsetR)#
+#
+parset(UCBAdmissions, tension = 0.4, width = "100%", height = 400)
+?table
+is.list(UCBAdmissions)
+?select
+UCBAdmissions
+UCBAdmissions$admit
+UCBAdmissions[1]
+UCBAdmissions[1,1,1]
+UCBAdmissions[1]
+UCBAdmissions[2]
+UCBAdmissions[15]
+UCBAdmissions[182]
+UCBAdmissions[18]
+UCBAdmissions[45]
+length(UCBAdmissions)
+?subset
+length(UCBAdmissions)
+str(UCBAdmissions)
+subset(UCBAdmissions, c('Gender', "Dept"))
+subset(UCBAdmissions, c(T,F))
+subset(UCBAdmissions, c(T))
+subset(UCBAdmissions, c(T, F))
+subset(UCBAdmissions, c(T, F, T))
+subset(UCBAdmissions, c(T, F, T, T))
+54 + 46 + 30 + 28 + 15 + 12 + 9
+194 / 200
 setwd('/Users/nguyendu/Google Drive/swissinfo/2015_07_16_illegalMedicine/prod')
 library(countrycode)#
 library(tidyr)#
@@ -606,19 +624,48 @@ for (i in 1:ncol(trad)) {#
 	# map details to df#
 	df.l$details <- unlist(details.l[match(df.l$iso2, names(details.l))])#
 #
-	mb_attribution <- paste0(" swissinfo.ch | ", trad["source",lang] , '| Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ')#
+	mb_attribution <- paste0(" swissinfo.ch | ", trad["source",lang] , ' | Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ')#
+	#### INTEGRATE DIR RTL FOR ARABIC !!!!!!!!!#
+	# if(lang == 'ar') {#
+	# 	topP <- paste0('<div align=\"right\"><strong>', data$geo, "</strong>", '<p dir=\"rtl\" style=\"font-size:', fontSize, '\">')#
+	# } else {#
+	# 	topP <- paste0('<strong>', data$geo, "</strong>", '<p style=\"font-size:', fontSize, '\">')#
+	# }#
+	##
+	# top <- paste0(topP,#
+	#   trad['tooltip.refugeesTotal', lang], ": ", "<strong>",  data$refugees, "</strong><br>",#
+	#   	  trad['tooltip.asylumTotal', lang], ": ", "<strong>",  data$asylumSeeker,"</strong><br><br>"#
+	#   )#
+	##
+	# popup_abs <- paste0(top, "</p>")#
+	##
+	# popup_pop <- paste0(top,#
+	#   trad['tooltip.population', lang], ": ", round(data$pop / 10^6, 2), " ", trad['tooltip.popMillion', lang], "<br>",#
+	#   trad['tooltip.totalByPop', lang], ": ", "<strong>", data$totalParMillion,#
+	#   "</strong></p>", ifelse(lang == 'ar', "</div>", ""))#
 #
-	popup <- paste0('<h3>', df.l$geo, "</h3>",#
+	if(lang == 'ar') {#
+		divS <- '<div align=\"right\">'#
+		divE <- "</div>"#
+		divIn <- 'dir=\"rtl\"'#
+	} else {#
+		divS <- ''#
+		divE <- ""#
+		divIn <- ""#
+	}#
+#
+	popup <- paste0(divS, '<h3>', df.l$geo, "</h3>",#
 		  '<p style=\"font-size:', "1.15em", '\">',#
 		  trad['popup_1', lang], " ", "<strong>",  df.l$tot, "</strong><br></p>",#
 		  trad['popup_2', lang],#
-		  '<p style=\"font-size:', fontSize, '\">', '<ul style="list-style-type:square">', df.l$details, "</ul></p>")#
+		  '<p style=\"font-size:', fontSize, '\">', '<ul ', divIn, ' style="list-style-type:square">',#
+		  	df.l$details, "</ul></p>", divE)#
 #
 	map <- leaflet(data = df.l) %>% addTiles(urlTemplate = mb_tiles, attribution = mb_attribution) %>%#
-	  		addCircleMarkers(lng = ~lon, lat = ~lat, stroke = FALSE, fillOpacity = 0.6, fillColor = swi_rpal[5],#
-	  	    radius = ~ sqrt(tot * 4), popup = popup) %>%#
-	  		setView(6, 23, zoom = 3) %>%#
-			addLegend(position = "topright", title = "Map title", opacity = 0, colors = NULL, labels = NULL)#
+	  		addCircles(lng = ~lon, lat = ~lat, stroke = FALSE, fillOpacity = 0.6, fillColor = swi_rpal[5],#
+	  	    radius = ~ sqrt(tot) * 10^4 * 4, popup = popup) %>%#
+	  		setView(15, 23, zoom = 2) %>%#
+			addLegend(position = "topright", title = trad['map_title', lang], opacity = 0, colors = NULL, labels = NULL)#
 #
 	saveWidget(map, file = output.html, selfcontained = FALSE, libdir = "leafletjs")#
 #

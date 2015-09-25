@@ -114,24 +114,52 @@ for (i in 1:ncol(trad)) {
 
 	mb_attribution <- paste0(" swissinfo.ch | ", trad["source",lang] , ' | Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ')
 
-	popup <- paste0('<h3>', df.l$geo, "</h3>",
+
+
+	#### INTEGRATE DIR RTL FOR ARABIC !!!!!!!!!
+	# if(lang == 'ar') {
+	# 	topP <- paste0('<div align=\"right\"><strong>', data$geo, "</strong>", '<p dir=\"rtl\" style=\"font-size:', fontSize, '\">')
+	# } else {
+	# 	topP <- paste0('<strong>', data$geo, "</strong>", '<p style=\"font-size:', fontSize, '\">')
+	# }
+	#
+	# top <- paste0(topP,
+	#   trad['tooltip.refugeesTotal', lang], ": ", "<strong>",  data$refugees, "</strong><br>",
+	#   	  trad['tooltip.asylumTotal', lang], ": ", "<strong>",  data$asylumSeeker,"</strong><br><br>"
+	#   )
+	#
+	# popup_abs <- paste0(top, "</p>")
+	#
+	# popup_pop <- paste0(top,
+	#   trad['tooltip.population', lang], ": ", round(data$pop / 10^6, 2), " ", trad['tooltip.popMillion', lang], "<br>",
+	#   trad['tooltip.totalByPop', lang], ": ", "<strong>", data$totalParMillion,
+	#   "</strong></p>", ifelse(lang == 'ar', "</div>", ""))
+
+	if(lang == 'ar') {
+		divS <- '<div align=\"right\">'
+		divE <- "</div>"
+		divIn <- 'dir=\"rtl\"'
+	} else {
+		divS <- ''
+		divE <- ""
+		divIn <- ""
+	}
+
+	popup <- paste0(divS, '<h3>', df.l$geo, "</h3>",
 		  '<p style=\"font-size:', "1.15em", '\">',
 		  trad['popup_1', lang], " ", "<strong>",  df.l$tot, "</strong><br></p>",
 		  trad['popup_2', lang],
-		  '<p style=\"font-size:', fontSize, '\">', '<ul style="list-style-type:square">', df.l$details, "</ul></p>")
+		  '<p style=\"font-size:', fontSize, '\">', '<ul ', divIn, ' style="list-style-type:square">',
+		  	df.l$details, "</ul></p>", divE)
 
 	map <- leaflet(data = df.l) %>% addTiles(urlTemplate = mb_tiles, attribution = mb_attribution) %>%
 	  		addCircles(lng = ~lon, lat = ~lat, stroke = FALSE, fillOpacity = 0.6, fillColor = swi_rpal[5],
 	  	    radius = ~ sqrt(tot) * 10^4 * 4, popup = popup) %>%
-	  		setView(6, 23, zoom = 3) %>%
+	  		setView(15, 23, zoom = 2) %>%
 			addLegend(position = "topright", title = trad['map_title', lang], opacity = 0, colors = NULL, labels = NULL)
 
 	saveWidget(map, file = output.html, selfcontained = FALSE, libdir = "leafletjs")
 
 }
-
-
-
-
 
 
